@@ -1,0 +1,51 @@
+---
+- name: "Updating apt repo/cache"
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+  become: true
+  become_method: sudo
+
+- name: "Upgrade all packages"
+  apt: upgrade=yes force_apt_get=yes
+  become: true
+  become_method: sudo
+
+- name: "Install XRDP"
+  apt:
+    name: xrdp
+    state: present
+  become: true
+  become_method: sudo
+
+- name: "Start XRDP Service"
+  service:
+    name: xrdp
+    state: started
+  become: true
+  become_method: sudo
+
+- name: "Enable XRDP Service"
+  service:
+    name: xrdp
+    enabled: true
+  become: true
+  become_method: sudo
+
+- name: "Add xrdp user to ssl-cert group"
+  user:
+    name: xrdp
+    groups: ssl-cert
+    append: yes
+  become: true
+  become_method: sudo
+
+- name: "Install Desktop Environment"
+  apt:
+    name:
+      - xfce4
+      - xfce4-goodies
+      - xorg
+      - dbus-x11
+      - x11-xserver-utils
+    state: present
+  become: true
+  become_method: sudo

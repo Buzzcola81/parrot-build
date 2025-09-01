@@ -1,0 +1,67 @@
+---
+- name: Create polkit directory
+  file:
+    path: /etc/polkit-1/localauthority/50-local.d/
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+
+- name: Create 45-allow-xrdp.pkla
+  copy:
+    content: |
+      [Allow VPN Connections]
+      Identity=unix-user:*
+      Action=org.freedesktop.NetworkManager.vpn.connect;org.freedesktop.NetworkManager.settings.modify.own;org.freedesktop.NetworkManager.network-control
+      ResultAny=yes
+      ResultInactive=yes
+      ResultActive=yes
+    dest: /etc/polkit-1/localauthority/50-local.d/45-allow-xrdp.pkla
+    mode: '0644'
+    owner: root
+    group: root
+  notify: restart network manager
+
+- name: Create 46-allow-xrdp.pkla
+  copy:
+    content: |
+      [Allow VPN Management]
+      Identity=unix-user:*
+      Action=org.freedesktop.NetworkManager.vpn.*
+      ResultAny=yes
+      ResultInactive=yes
+      ResultActive=yes
+    dest: /etc/polkit-1/localauthority/50-local.d/46-allow-xrdp.pkla
+    mode: '0644'
+    owner: root
+    group: root
+  notify: restart network manager
+
+- name: Create 47-allow-colord.pkla
+  copy:
+    content: |
+      [Allow Colord all Users]
+      Identity=unix-user:*
+      Action=org.freedesktop.color-manager.create-device;org.freedesktop.color-manager.create-profile;org.freedesktop.color-manager.delete-device;org.freedesktop.color-manager.delete-profile;org.freedesktop.color-manager.modify-device;org.freedesktop.color-manager.modify-profile
+      ResultAny=no
+      ResultInactive=no
+      ResultActive=yes
+    dest: /etc/polkit-1/localauthority/50-local.d/47-allow-colord.pkla
+    mode: '0644'
+    owner: root
+    group: root
+
+- name: Create 48-allow-update-repo.pkla
+  copy:
+    content: |
+      [Allow Package Management all Users]
+      Identity=unix-user:*
+      Action=org.freedesktop.packagekit.system-sources-refresh
+      ResultAny=yes
+      ResultInactive=yes
+      ResultActive=yes
+    dest: /etc/polkit-1/localauthority/50-local.d/48-allow-update-repo.pkla
+    mode: '0644'
+    owner: root
+    group: root
+
