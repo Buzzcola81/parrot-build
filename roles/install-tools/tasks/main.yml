@@ -2,3 +2,4 @@
 - include_tasks: 1-apt-update.yml
 - include_tasks: 2-setup-xrdp-desktop.yml
 - include_tasks: 3-update-xrdp-permissions.yml
+- include_tasks: 4-install-tools.yml
