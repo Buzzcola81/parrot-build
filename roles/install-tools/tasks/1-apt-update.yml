@@ -49,3 +49,15 @@
     state: present
   become: true
   become_method: sudo
+
+- name: "Install locate utility"
+  apt:
+    name:
+      - mlocate
+    state: present
+  become: true
+  become_method: sudo
+
+- name: Update locate database
+  command: updatedb
+  changed_when: true
