@@ -26,15 +26,16 @@
   command: pipx ensurepath
   changed_when: false
 
-- name: Install defaultcreds-cheat-sheet with pipx (as normal user)
-  command: pipx install defaultcreds-cheat-sheet
-  args:
-    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/defaultcreds-cheat-sheet"
+- name: Install or upgrade defaultcreds-cheat-sheet with pipx (as normal user)
+  command: pipx install --force defaultcreds-cheat-sheet
+  register: pipx_install
+  changed_when: "'installed package' in pipx_install.stdout or 'upgraded package' in pipx_install.stdout"
 
 - name: Symlink creds into /usr/local/bin for global access
   file:
     src: "{{ lookup('env','HOME') }}/.local/bin/creds"
     dest: /usr/local/bin/creds
     state: link
+    force: true
   become: true
   become_method: sudo
