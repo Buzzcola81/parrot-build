@@ -15,25 +15,35 @@
   become: true
   become_method: sudo
 
-- name: Ensure python3-venv is installed
-  apt:
-    name: python3-venv
+- name: Install pipx if not present
+  ansible.builtin.apt:
+    name: pipx
     state: present
-  become: false
-  # become_method: sudo
 
-- name: Create virtualenv for tools
-  command: python3 -m venv /opt/tools-venv
-  args:
-    creates: /opt/tools-venv/bin/activate
-  become: false
-  # become_method: sudo
-
-- name: Install defaultcreds-cheat-sheet in venv
-  pip:
+- name: Install defaultcreds-cheat-sheet
+  ansible.builtin.pipx:
     name: defaultcreds-cheat-sheet
-    virtualenv: /opt/tools-venv
-    virtualenv_command: python3 -m venv
-  become: false
-  # become_method: sudo
+    state: present
+
+- name: Ensure pipx binaries are in PATH
+  ansible.builtin.lineinfile:
+    path: ~/.bashrc
+    line: 'export PATH="$HOME/.local/bin:$PATH"'
+    state: present
+    create: true
+
+- name: Reload shell configuration
+  ansible.builtin.shell:
+    cmd: source ~/.bashrc
+  changed_when: false
+
+- name: Verify installation
+  ansible.builtin.command:
+    cmd: creds --help
+  register: creds_output
+  failed_when: false
+
+- name: Display verification result
+  ansible.builtin.debug:
+    msg: "{{ creds_output.stdout | default('Installation verification failed') }}"
   
