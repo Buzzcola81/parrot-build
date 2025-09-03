@@ -15,27 +15,8 @@
   become: true
   become_method: sudo
 
-- name: Ensure pipx is installed system-wide
-  become: true
-  apt:
-    name: pipx
-    state: present
-
-
-- name: Ensure pipx is installed
-  apt:
-    name: pipx
-    state: present
-  become: true
-  become_method: sudo
-
-- name: Ensure pipx path is set up
-  command: pipx ensurepath
-  changed_when: false
-
-- name: Install defaultcreds-cheat-sheet with pipx (as normal user)
-  command: pipx install --force defaultcreds-cheat-sheet
-  become: false
-  args:
-    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/defaultcreds-cheat-sheet"
+- name: Install defaultcreds-cheat-sheet
+  pip:
+    name: defaultcreds-cheat-sheet
+    executable: pip3
   
