@@ -15,21 +15,25 @@
   become: true
   become_method: sudo
 
-- name: Create virtual environment
-  become: false
-  ansible.builtin.file:
-    path: /tmp/defaultcreds-env
-    state: directory
-    
-- name: Create virtual environment
-  become: false
-  ansible.builtin.command:
-    cmd: python3 -m venv /tmp/defaultcreds-env
-    
-- name: Install package in virtual environment
-  become: false
-  ansible.builtin.pip:
-    name: defaultcreds-cheat-sheet
-    executable: /tmp/defaultcreds-env/bin/pip
+- name: Ensure python3-venv is installed
+  apt:
+    name: python3-venv
     state: present
+  become: false
+  # become_method: sudo
+
+- name: Create virtualenv for tools
+  command: python3 -m venv /opt/tools-venv
+  args:
+    creates: /opt/tools-venv/bin/activate
+  become: false
+  # become_method: sudo
+
+- name: Install defaultcreds-cheat-sheet in venv
+  pip:
+    name: defaultcreds-cheat-sheet
+    virtualenv: /opt/tools-venv
+    virtualenv_command: python3 -m venv
+  become: false
+  # become_method: sudo
   
