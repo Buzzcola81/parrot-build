@@ -1,5 +1,7 @@
 ---
 - name: Create polkit directory
+  become: true
+  become_method: sudo
   file:
     path: /etc/polkit-1/localauthority/50-local.d/
     state: directory
@@ -8,6 +10,8 @@
     group: root
 
 - name: Create 45-allow-xrdp.pkla
+  become: true
+  become_method: sudo
   copy:
     content: |
       [Allow VPN Connections]
@@ -23,6 +27,8 @@
   notify: restart network manager
 
 - name: Create 46-allow-xrdp.pkla
+  become: true
+  become_method: sudo
   copy:
     content: |
       [Allow VPN Management]
@@ -38,6 +44,8 @@
   notify: restart network manager
 
 - name: Create 47-allow-colord.pkla
+  become: true
+  become_method: sudo
   copy:
     content: |
       [Allow Colord all Users]
@@ -52,6 +60,8 @@
     group: root
 
 - name: Create 48-allow-update-repo.pkla
+  become: true
+  become_method: sudo
   copy:
     content: |
       [Allow Package Management all Users]
