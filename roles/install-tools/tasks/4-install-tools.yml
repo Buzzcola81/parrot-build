@@ -15,47 +15,19 @@
   become: true
   become_method: sudo
 
-- name: Install pipx
-  ansible.builtin.apt:
+- name: Ensure pipx is installed
+  apt:
     name: pipx
     state: present
+  become: true
+  become_method: sudo
 
-- name: Install defaultcreds-cheat-sheet
-  ansible.builtin.command:
-    cmd: pipx install --force defaultcreds-cheat-sheet
-  environment:
-    PATH: "{{ ansible_env.PATH }}:/usr/local/bin:/usr/bin:/bin"
-  register: pipx_output
-  failed_when: pipx_output.rc != 0
-
-- name: Ensure pipx binaries are in PATH
-  ansible.builtin.lineinfile:
-    path: ~/.bashrc
-    line: 'export PATH="$HOME/.local/bin:$PATH"'
-    state: present
-    create: true
-
-- name: Reload shell configuration
-  ansible.builtin.shell:
-    cmd: bash -c 'source ~/.bashrc'
+- name: Ensure pipx path is set up
+  command: pipx ensurepath
   changed_when: false
 
-- name: Verify installation
-  ansible.builtin.command:
-    cmd: creds --help
-  register: creds_output
-  failed_when: false
-
-- name: Display detailed verification
-  ansible.builtin.debug:
-    msg: |
-      Installation Status:
-      ---------------
-      pipx install output: {{ pipx_output.stdout | default('No output') }}
-      pipx install error: {{ pipx_output.stderr | default('No errors') }}
-      creds --help output: {{ creds_output.stdout | default('No output') }}
-      creds --help error: {{ creds_output.stderr | default('No errors') }}
-      PATH contains ~/.local/bin: {{ '~/.local/bin' in ansible_env.PATH | default('No') }}
-      Current user: {{ ansible_user_id }}
-      Home directory: {{ ansible_env.HOME }}
-#working
+- name: Install defaultcreds-cheat-sheet with pipx (as normal user)
+  command: pipx install --force defaultcreds-cheat-sheet
+  become: false
+  args:
+    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/defaultcreds-cheat-sheet"
