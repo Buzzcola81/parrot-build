@@ -26,7 +26,6 @@
   file:
     path: /root/.local/pipx/venvs/defaultcreds-cheat-sheet
     state: absent
-    recurse: true
 
 - name: Ensure pipx is installed system-wide
   become: true
