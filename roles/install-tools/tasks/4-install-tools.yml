@@ -15,24 +15,26 @@
   become: true
   become_method: sudo
 
-- name: Ensure python3-venv is installed
+- name: Ensure pipx is installed
   apt:
-    name: python3-venv
+    name: pipx
     state: present
   become: true
   become_method: sudo
 
-- name: Create virtualenv for tools
-  command: python3 -m venv /opt/tools-venv
-  args:
-    creates: /opt/tools-venv/bin/activate
-  become: true
-  become_method: sudo
+- name: Ensure pipx path is set up
+  command: pipx ensurepath
+  changed_when: false
 
-- name: Install defaultcreds-cheat-sheet in venv
-  pip:
-    name: defaultcreds-cheat-sheet
-    virtualenv: /opt/tools-venv
-    virtualenv_command: python3 -m venv
+- name: Install defaultcreds-cheat-sheet with pipx (as normal user)
+  command: pipx install defaultcreds-cheat-sheet
+  args:
+    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/defaultcreds-cheat-sheet"
+
+- name: Symlink creds into /usr/local/bin for global access
+  file:
+    src: "{{ lookup('env','HOME') }}/.local/bin/creds"
+    dest: /usr/local/bin/creds
+    state: link
   become: true
   become_method: sudo
