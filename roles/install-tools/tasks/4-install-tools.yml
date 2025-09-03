@@ -58,3 +58,4 @@
       PATH contains ~/.local/bin: {{ '~/.local/bin' in ansible_env.PATH | default('No') }}
       Current user: {{ ansible_user_id }}
       Home directory: {{ ansible_env.HOME }}
+#working
