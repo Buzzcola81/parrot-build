@@ -26,7 +26,14 @@
   command: pipx ensurepath
   changed_when: false
 
+- name: Remove old root pipx venv
+  become: true
+  file:
+    path: /root/.local/pipx/venvs/defaultcreds-cheat-sheet
+    state: absent
+
 - name: Install defaultcreds-cheat-sheet with pipx (as normal user)
   command: pipx install --force defaultcreds-cheat-sheet
+  become: false
   args:
     creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/defaultcreds-cheat-sheet"
