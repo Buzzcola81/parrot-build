@@ -21,9 +21,10 @@
     state: present
 
 - name: Install defaultcreds-cheat-sheet
-  ansible.builtin.pipx:
-    name: defaultcreds-cheat-sheet
-    state: present
+  ansible.builtin.command:
+    cmd: pipx install defaultcreds-cheat-sheet
+  environment:
+    PATH: "{{ ansible_env.PATH }}:/usr/local/bin:/usr/bin:/bin"
 
 - name: Ensure pipx binaries are in PATH
   ansible.builtin.lineinfile:
