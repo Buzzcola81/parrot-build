@@ -21,23 +21,21 @@
     name: pipx
     state: present
 
-- name: Configure pipx for current user
-  become: false
-  shell: |
-    python3 -m pipx ensurepath
-    source ~/.bashrc
-    pipx completions bash > ~/.local/share/bash-completion/completions/pipx
-  args:
-    executable: /bin/bash
 
-- name: Install defaultcreds-cheat-sheet via pipx as normal user
-  become: false
-  shell: pipx install --force defaultcreds-cheat-sheet
-  args:
-    creates: "{{ ansible_env.HOME }}/.local/pipx/venvs/defaultcreds-cheat-sheet"
+- name: Ensure pipx is installed
+  apt:
+    name: pipx
+    state: present
+  become: true
+  become_method: sudo
 
-- name: Verify installation
+- name: Ensure pipx path is set up
+  command: pipx ensurepath
+  changed_when: false
+
+- name: Install defaultcreds-cheat-sheet with pipx (as normal user)
+  command: pipx install --force defaultcreds-cheat-sheet
   become: false
-  shell: creds --version
-  register: creds_version
-  failed_when: creds_version.rc != 0
+  args:
+    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/defaultcreds-cheat-sheet"
+  
