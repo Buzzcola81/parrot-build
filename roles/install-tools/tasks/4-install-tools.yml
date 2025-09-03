@@ -21,12 +21,6 @@
     path: /usr/local/bin/creds
     state: absent
 
-- name: Remove old root pipx venv
-  become: true
-  file:
-    path: /root/.local/pipx/venvs/defaultcreds-cheat-sheet
-    state: absent
-
 - name: Ensure pipx is installed system-wide
   become: true
   apt:
@@ -44,7 +38,7 @@
   become: false
   environment:
     HOME: "{{ ansible_env.HOME }}"
-    PATH: "{{ ansible_env.PATH }}:{{ ansible_env.HOME }}/.local/bin"
+    PATH: "{{ ansible_env.HOME }}/.local/bin:{{ ansible_env.PATH }}"
 
 - name: Ensure ~/.local/bin is in PATH permanently
   lineinfile:
