@@ -15,15 +15,27 @@
   become: true
   become_method: sudo
 
-- name: Ensure pipx is installed
+- name: Ensure pipx is installed (system-wide)
+  become: true
   apt:
     name: pipx
     state: present
-  become: true
 
-- name: Ensure pipx path is set up
+- name: Ensure pipx path is set up for user
   command: pipx ensurepath
   changed_when: false
+  environment:
+    HOME: "{{ ansible_env.HOME }}"
 
 - name: Install or upgrade defaultcreds-cheat-sheet with pipx (as normal user)
   command: pipx install --force defaultcreds-cheat-sheet
+  environment:
+    PATH: "{{ ansible_env.PATH }}"
+    HOME: "{{ ansible_env.HOME }}"
+
+- name: Ensure ~/.local/bin is in PATH for future shells
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    line: 'export PATH="$HOME/.local/bin:$PATH"'
+    state: present
+    insertafter: EOF
