@@ -15,6 +15,12 @@
   become: true
   become_method: sudo
 
+- name: Remove any old root-installed creds symlink
+  become: true
+  file:
+    path: /usr/local/bin/creds
+    state: absent
+
 - name: Ensure pipx is installed (system-wide)
   become: true
   apt:
