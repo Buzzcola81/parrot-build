@@ -15,7 +15,7 @@
   become: true
   become_method: sudo
 
-- name: Install pipx if not present
+- name: Install pipx
   ansible.builtin.apt:
     name: pipx
     state: present
@@ -40,11 +40,10 @@
 
 - name: Verify installation
   ansible.builtin.command:
-    cmd: creds --help
+    cmd: creds --version
   register: creds_output
   failed_when: false
 
 - name: Display verification result
   ansible.builtin.debug:
     msg: "{{ creds_output.stdout | default('Installation verification failed') }}"
-    
