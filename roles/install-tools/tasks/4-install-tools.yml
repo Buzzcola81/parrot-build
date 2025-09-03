@@ -14,3 +14,8 @@
     state: present
   become: true
   become_method: sudo
+
+- name: Install defaultcreds-cheat-sheet
+  pip:
+    name: defaultcreds-cheat-sheet
+    executable: pip3
