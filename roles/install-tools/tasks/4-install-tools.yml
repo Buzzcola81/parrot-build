@@ -19,8 +19,6 @@
   apt:
     name: pipx
     state: present
-  become: true
-  become_method: sudo
 
 - name: Ensure pipx path is set up
   command: pipx ensurepath
