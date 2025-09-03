@@ -27,13 +27,3 @@
 
 - name: Install or upgrade defaultcreds-cheat-sheet with pipx (as normal user)
   command: pipx install --force defaultcreds-cheat-sheet
-  register: pipx_install
-  changed_when: "'installed package' in pipx_install.stdout or 'upgraded package' in pipx_install.stdout"
-
-- name: Copy creds binary to /usr/local/bin for global access
-  become: true
-  copy:
-    src: "{{ lookup('env','HOME') }}/.local/bin/creds"
-    dest: /usr/local/bin/creds
-    mode: '0755'
-    remote_src: yes
