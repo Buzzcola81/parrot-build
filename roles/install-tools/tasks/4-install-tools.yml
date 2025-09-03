@@ -32,8 +32,9 @@
     path: /root/.local/pipx/venvs/defaultcreds-cheat-sheet
     state: absent
 
-- name: Install defaultcreds-cheat-sheet with pipx (as normal user)
+- name: Install defaultcreds-cheat-sheet as normal user
   command: pipx install --force defaultcreds-cheat-sheet
   become: false
-  args:
-    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/defaultcreds-cheat-sheet"
+  environment:
+    HOME: "{{ ansible_env.HOME }}"
+    PATH: "{{ ansible_env.HOME }}/.local/bin:{{ ansible_env.PATH }}"
