@@ -15,7 +15,7 @@
   become: true
   become_method: sudo
 
-- name: Remove old root-installed creds symlink
+- name: Remove any old root-installed creds symlink
   become: true
   file:
     path: /usr/local/bin/creds
@@ -27,17 +27,18 @@
     name: pipx
     state: present
 
-- name: Ensure pipx path is set up for the user
-  command: pipx ensurepath
-  changed_when: false
-  environment:
-    HOME: "{{ ansible_env.HOME }}"
+- name: Ensure ~/.local/bin exists for the user
+  file:
+    path: "{{ ansible_env.HOME }}/.local/bin"
+    state: directory
+    mode: '0755'
 
-- name: Install or upgrade defaultcreds-cheat-sheet for the user
+- name: Install or upgrade defaultcreds-cheat-sheet with pipx (as normal user)
   command: pipx install --force defaultcreds-cheat-sheet
+  become: false
   environment:
-    PATH: "{{ ansible_env.PATH }}"
     HOME: "{{ ansible_env.HOME }}"
+    PATH: "{{ ansible_env.PATH }}:{{ ansible_env.HOME }}/.local/bin"
 
 - name: Ensure ~/.local/bin is in PATH permanently
   lineinfile:
