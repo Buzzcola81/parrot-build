@@ -40,7 +40,7 @@
 
 - name: Verify installation
   ansible.builtin.command:
-    cmd: creds --version
+    cmd: creds --help
   register: creds_output
   failed_when: false
 
