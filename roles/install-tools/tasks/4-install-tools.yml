@@ -27,6 +27,6 @@
   changed_when: false
 
 - name: Install defaultcreds-cheat-sheet with pipx (as normal user)
-  command: pipx install defaultcreds-cheat-sheet
+  command: pipx install --force defaultcreds-cheat-sheet
   args:
     creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/defaultcreds-cheat-sheet"
