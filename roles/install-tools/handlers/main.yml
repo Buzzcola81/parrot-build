@@ -1,5 +1,7 @@
 ---
 - name: restart network manager
+  become: true
+  become_method: sudo
   service:
     name: NetworkManager
     state: restarted
