@@ -32,10 +32,9 @@
   changed_when: "'installed package' in pipx_install.stdout or 'upgraded package' in pipx_install.stdout"
 
 - name: Symlink creds into /usr/local/bin for global access
+  become: true
   file:
-    src: "{{ lookup('env','HOME') }}/.local/bin/creds"
+    src: "/home/buzzcola/.local/bin/creds"
     dest: /usr/local/bin/creds
     state: link
     force: true
-  become: true
-  become_method: sudo
