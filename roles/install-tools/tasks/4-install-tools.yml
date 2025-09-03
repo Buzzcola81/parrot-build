@@ -15,9 +15,24 @@
   become: true
   become_method: sudo
 
-- name: Install defaultcreds-cheat-sheet
+- name: Ensure python3-venv is installed
+  apt:
+    name: python3-venv
+    state: present
+  become: true
+  become_method: sudo
+
+- name: Create virtualenv for tools
+  command: python3 -m venv /opt/tools-venv
+  args:
+    creates: /opt/tools-venv/bin/activate
+  become: true
+  become_method: sudo
+
+- name: Install defaultcreds-cheat-sheet in venv
   pip:
     name: defaultcreds-cheat-sheet
-    executable: pip3
+    virtualenv: /opt/tools-venv
+    virtualenv_command: python3 -m venv
   become: true
   become_method: sudo
