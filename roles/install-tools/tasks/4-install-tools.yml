@@ -38,3 +38,10 @@
   environment:
     HOME: "{{ ansible_env.HOME }}"
     PATH: "{{ ansible_env.HOME }}/.local/bin:{{ ansible_env.PATH }}"
+
+- name: Ensure ~/.local/bin is in PATH permanently
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    line: 'export PATH="$HOME/.local/bin:$PATH"'
+    state: present
+    insertafter: EOF
