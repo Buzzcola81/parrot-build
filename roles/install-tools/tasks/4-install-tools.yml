@@ -19,3 +19,5 @@
   pip:
     name: defaultcreds-cheat-sheet
     executable: pip3
+  become: true
+  become_method: sudo
