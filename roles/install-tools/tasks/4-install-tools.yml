@@ -35,7 +35,7 @@
 
 - name: Reload shell configuration
   ansible.builtin.shell:
-    cmd: source ~/.bashrc
+    cmd: bash -c 'source ~/.bashrc'
   changed_when: false
 
 - name: Verify installation
@@ -47,4 +47,4 @@
 - name: Display verification result
   ansible.builtin.debug:
     msg: "{{ creds_output.stdout | default('Installation verification failed') }}"
-  
+    
