@@ -6,3 +6,11 @@
     state: present
   become: true
   become_method: sudo
+
+- name: "Install xfreerdp utility"
+  apt:
+    name:
+      - freerdp2-x11
+    state: present
+  become: true
+  become_method: sudo
