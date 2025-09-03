@@ -14,34 +14,3 @@
     state: present
   become: true
   become_method: sudo
-
-- name: Ensure pipx is installed
-  apt:
-    name: pipx
-    state: present
-  become: true
-  become_method: sudo
-
-- name: Ensure pipx path is set up
-  command: pipx ensurepath
-  changed_when: false
-
-- name: Remove old root pipx venv
-  become: true
-  file:
-    path: /root/.local/pipx/venvs/defaultcreds-cheat-sheet
-    state: absent
-
-- name: Install defaultcreds-cheat-sheet as normal user
-  command: pipx install --force defaultcreds-cheat-sheet
-  become: false
-  environment:
-    HOME: "{{ ansible_env.HOME }}"
-    PATH: "{{ ansible_env.HOME }}/.local/bin:{{ ansible_env.PATH }}"
-
-- name: Ensure ~/.local/bin is in PATH permanently
-  lineinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
-    line: 'export PATH="$HOME/.local/bin:$PATH"'
-    state: present
-    insertafter: EOF
