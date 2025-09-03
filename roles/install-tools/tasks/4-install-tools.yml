@@ -15,8 +15,18 @@
   become: true
   become_method: sudo
 
-- name: Install defaultcreds-cheat-sheet
-  pip:
+- name: Create virtual environment
+  ansible.builtin.file:
+    path: /tmp/defaultcreds-env
+    state: directory
+    
+- name: Create virtual environment
+  ansible.builtin.command:
+    cmd: python3 -m venv /tmp/defaultcreds-env
+    
+- name: Install package in virtual environment
+  ansible.builtin.pip:
     name: defaultcreds-cheat-sheet
-    executable: pip3
+    executable: /tmp/defaultcreds-env/bin/pip
+    state: present
   
