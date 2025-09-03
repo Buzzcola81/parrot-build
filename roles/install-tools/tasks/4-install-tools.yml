@@ -15,9 +15,22 @@
   become: true
   become_method: sudo
 
-- name: Install defaultcreds-cheat-sheet
+- name: Ensure pipx is installed
+  become: true
+  apt:
+    name: pipx
+    state: present
+
+- name: Ensure pipx is usable by the current user
+  become: true
+  command: "python3 -m pipx ensurepath"
+  environment:
+    PATH: "{{ ansible_env.PATH }}"
+
+- name: Install defaultcreds-cheat-sheet via pipx
   become: false
   pip:
     name: defaultcreds-cheat-sheet
-    virtualenv: ~/.venvs/defaultcreds
-    executable: pip3
+    executable: pipx
+    state: present
+    
