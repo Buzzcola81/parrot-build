@@ -19,4 +19,5 @@
   become: false
   pip:
     name: defaultcreds-cheat-sheet
+    virtualenv: ~/.venvs/defaultcreds
     executable: pip3
