@@ -61,3 +61,5 @@
 - name: Update locate database
   command: updatedb
   changed_when: true
+  become: true
+  become_method: sudo
