@@ -31,3 +31,9 @@
   become: false
   args:
     creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/defaultcreds-cheat-sheet"
+
+- name: Install pypykatz with pipx (as normal user)
+  command: pipx install --force pypykatz
+  become: false
+  args:
+    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/pypykatz"
