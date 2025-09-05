@@ -37,3 +37,9 @@
   become: false
   args:
     creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/pypykatz"
+
+- name: Install donpapi with pipx (as normal user)
+  command: pipx install --force pypykatz
+  become: false
+  args:
+    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/donpapi"

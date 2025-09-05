@@ -1,0 +1,18 @@
+---
+- name: Create directory for windows tools
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/Documents/tools/windows"
+    state: directory
+
+- name: Download LaZagne.exe and save to tools folder
+  ansible.builtin.get_url:
+    url: https://github.com/AlessandroZ/LaZagne/releases/download/v2.4.7/LaZagne.exe
+    dest: "{{ ansible_user_dir }}/Documents/tools/windows/LaZagne.exe"
+    mode: '0755'
+
+- name: Copy mimikatz.exe tools directory
+  local_action:
+    module: copy
+    src: "/usr/share/windows-resources/mimikatz/x64/mimikatz.exe"
+    dest: "{{ ansible_user_dir }}/Documents/tools/windows/mimikatz.exe"
+    mode: '0755'
