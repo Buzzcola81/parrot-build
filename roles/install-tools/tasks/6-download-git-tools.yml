@@ -8,3 +8,8 @@
   git:
     repo: https://github.com/urbanadventurer/username-anarchy
     dest: /home/buzzcola/tools/username-anarchy
+
+- name: Clone kerbrute repository
+  git:
+    repo: https://github.com/ropnop/kerbrute
+    dest: /home/buzzcola/tools/kerbrute
