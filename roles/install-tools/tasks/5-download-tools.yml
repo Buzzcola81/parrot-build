@@ -20,8 +20,8 @@
 - name: Download kerbrute
   local_action:
     module: get_url
-    url: https://release-assets.githubusercontent.com/github-production-release-asset/168977645/e8ae4080-1eb1-11ea-996a-d379e524e717
-    dest: /tmp/kerbrute
+    url: https://github.com/ropnop/kerbrute/releases/download/v1.0.3/kerbrute_linux_amd64
+    dest: /tmp/kerbrute_linux_amd64
     mode: '0755'
 
 - name: Move kerbrute to system location
@@ -29,7 +29,7 @@
   become_method: sudo
   copy:
     src: /tmp/kerbrute
-    dest: /usr/local/bin/kerbrute
+    dest: /usr/local/bin/kerbrute_linux_amd64
     mode: '0755'
 #https://github.com/ropnop/kerbrute/releases/download/v1.0.3/kerbrute_linux_amd64
 ##https://release-assets.githubusercontent.com/github-production-release-asset/168977645/e8ae4080-1eb1-11ea-996a-d379e524e717
