@@ -7,4 +7,4 @@
 - name: Clone username-anarchy repository
   git:
     repo: https://github.com/urbanadventurer/username-anarchy
-    dest: /home/buzzcola/tools
+    dest: /home/buzzcola/tools/username-anarchy
