@@ -16,3 +16,12 @@
     src: "/usr/share/windows-resources/mimikatz/x64/mimikatz.exe"
     dest: "{{ ansible_user_dir }}/Documents/tools/windows/mimikatz.exe"
     mode: '0755'
+
+- name: Copy kerbrute_linux_amd64 tool
+  local_action:
+    module: copy
+    src: "https://github.com/ropnop/kerbrute/releases/download/v1.0.3/kerbrute_linux_amd64"
+    dest: "/usr/local/bin/kerbrute_linux_amd64"
+    mode: '0755'
+  become: true
+  become_method: sudo

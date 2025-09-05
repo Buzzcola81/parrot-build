@@ -8,13 +8,3 @@
   git:
     repo: https://github.com/urbanadventurer/username-anarchy
     dest: "{{ ansible_user_dir }}/tools/username-anarchy"
-
-- name: Clone kerbrute repository
-  git:
-    repo: https://github.com/ropnop/kerbrute
-    dest: "{{ ansible_user_dir }}/tools/kerbrute"
-
-- name: Add execute permissions to kerbrute.go
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/tools/kerbrute/cmd/kerbrute.go"
-    mode: 'a+x'
