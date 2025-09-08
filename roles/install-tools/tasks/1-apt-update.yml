@@ -70,18 +70,6 @@
   become: true
   become_method: sudo
 
-# This is for https://github.com/lgandx/PCredz?tab=readme-ov-file
-- name: "Install libpcap-dev"
-  apt:
-    name:
-      - libpcap-dev
-      - file
-      - nano
-      - iproute2
-    state: present
-  become: true
-  become_method: sudo
-
 - name: Update locate database
   command: updatedb
   changed_when: true
