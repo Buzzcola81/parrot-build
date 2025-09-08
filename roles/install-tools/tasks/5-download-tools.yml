@@ -4,6 +4,11 @@
     path: "{{ ansible_user_dir }}/Documents/tools/windows"
     state: directory
 
+- name: Create directory for linux tools
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/Documents/tools/linux"
+    state: directory
+
 - name: Download LaZagne.exe and save to tools folder
   ansible.builtin.get_url:
     url: https://github.com/AlessandroZ/LaZagne/releases/download/v2.4.7/LaZagne.exe
