@@ -15,6 +15,12 @@
     dest: "{{ ansible_user_dir }}/Documents/tools/windows/LaZagne.exe"
     mode: '0755'
 
+- name: Download Snaffler.exe and save to tools folder
+  ansible.builtin.get_url:
+    url: https://release-assets.githubusercontent.com/github-production-release-asset/251227221/aae4dc16-f7e7-4f2e-b0dc-8087f9533021
+    dest: "{{ ansible_user_dir }}/Documents/tools/windows/Snaffler.exe"
+    mode: '0755'
+
 - name: Copy mimikatz.exe tools directory
   local_action:
     module: copy
