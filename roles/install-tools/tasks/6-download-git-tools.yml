@@ -33,3 +33,8 @@
   git:
     repo: https://github.com/blacklanternsecurity/MANSPIDER.git
     dest: "{{ ansible_user_dir }}/tools/MANSPIDER"
+
+- name: Clone Invoke-TheHash repository
+  git:
+    repo: https://github.com/Kevin-Robertson/Invoke-TheHash.git
+    dest: "{{ ansible_user_dir }}/Documents/tools/windows/Invoke-TheHash"
