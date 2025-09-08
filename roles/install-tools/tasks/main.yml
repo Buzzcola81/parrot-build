@@ -5,3 +5,4 @@
 - include_tasks: 4-install-tools.yml
 - include_tasks: 5-download-tools.yml
 - include_tasks: 6-download-git-tools.yml
+- include_tasks: 7-docker-build.yml
