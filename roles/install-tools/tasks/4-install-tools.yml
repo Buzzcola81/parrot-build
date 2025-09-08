@@ -56,19 +56,5 @@
   command: pipx install --force python-libpcap
   become: false
   args:
-    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/python-libpcap"
-
-# # This is for https://github.com/lgandx/PCredz?tab=readme-ov-file
-# - name: Install pylibpcap with pipx (as normal user)
-#   command: pipx install --force pylibpcap
-#   become: false
-#   args:
-#     creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/pylibpcap"
-
-- name: Install packages using pipx
-  pipx:
-    name:
-      - Cython
-      - python-libpcap
-  become: false
+    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/pylibpcap"
 
