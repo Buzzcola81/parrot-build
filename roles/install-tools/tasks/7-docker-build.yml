@@ -1,7 +1,5 @@
 ---
-- name: build the pcredz image
-  docker_image: >
-    name=pcredz
-    tag=ex1
-    path={{ ansible_user_dir }}/tools/PCredz
-    state=present
+- name: Build the PCredz docker image
+  ansible.builtin.command:
+    cmd: "docker build . -t pcredz"
+    chdir: "{{ ansible_user_dir }}/tools/PCredz"
