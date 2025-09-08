@@ -43,3 +43,17 @@
   become: false
   args:
     creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/donpapi"
+
+# This is for https://github.com/lgandx/PCredz?tab=readme-ov-file
+- name: Install Cython with pipx (as normal user)
+  command: pipx install --force Cython
+  become: false
+  args:
+    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/Cython"
+
+# This is for https://github.com/lgandx/PCredz?tab=readme-ov-file
+- name: Install python-libpcap with pipx (as normal user)
+  command: pipx install --force python-libpcap
+  become: false
+  args:
+    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/python-libpcap"

@@ -18,3 +18,8 @@
   git:
     repo: https://github.com/unode/firefox_decrypt.git
     dest: "{{ ansible_user_dir }}/tools/firefox_decrypt"
+
+- name: Clone PCredz repository
+  git:
+    repo: https://github.com/lgandx/PCredz.git
+    dest: "{{ ansible_user_dir }}/tools/PCredz"
