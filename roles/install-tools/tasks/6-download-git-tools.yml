@@ -23,3 +23,8 @@
   git:
     repo: https://github.com/lgandx/PCredz.git
     dest: "{{ ansible_user_dir }}/tools/PCredz"
+
+- name: Clone PowerHuntShares repository
+  git:
+    repo: https://github.com/NetSPI/PowerHuntShares
+    dest: "{{ ansible_user_dir }}/Documents/tools/windows/PowerHuntShares"
