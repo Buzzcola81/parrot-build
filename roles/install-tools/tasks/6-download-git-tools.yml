@@ -13,3 +13,8 @@
   git:
     repo: https://github.com/AlessandroZ/LaZagne.git
     dest: "{{ ansible_user_dir }}/tools/LaZagne"
+
+- name: Clone username-anarchy repository
+  git:
+    repo: https://github.com/unode/firefox_decrypt.git
+    dest: "{{ ansible_user_dir }}/tools/firefox_decrypt"
