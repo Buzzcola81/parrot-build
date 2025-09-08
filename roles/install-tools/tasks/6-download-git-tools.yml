@@ -26,5 +26,10 @@
 
 - name: Clone PowerHuntShares repository
   git:
-    repo: https://github.com/NetSPI/PowerHuntShares
+    repo: https://github.com/NetSPI/PowerHuntShares.git
     dest: "{{ ansible_user_dir }}/Documents/tools/windows/PowerHuntShares"
+
+- name: Clone MANSPIDER repository
+  git:
+    repo: https://github.com/blacklanternsecurity/MANSPIDER.git
+    dest: "{{ ansible_user_dir }}/tools/MANSPIDER"
