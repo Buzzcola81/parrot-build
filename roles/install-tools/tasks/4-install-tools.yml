@@ -65,11 +65,10 @@
 #   args:
 #     creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/pylibpcap"
 
-- name: Install required Python packages
-  pip:
+- name: Install packages using pipx
+  pipx:
     name:
       - Cython
       - python-libpcap
-    executable: pip3
-    extra_args: --user
   become: false
+
