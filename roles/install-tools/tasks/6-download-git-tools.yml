@@ -8,3 +8,8 @@
   git:
     repo: https://github.com/urbanadventurer/username-anarchy
     dest: "{{ ansible_user_dir }}/tools/username-anarchy"
+
+- name: Clone username-anarchy repository
+  git:
+    repo: https://github.com/AlessandroZ/LaZagne.git
+    dest: "{{ ansible_user_dir }}/tools/LaZagne"
