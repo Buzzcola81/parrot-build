@@ -6,5 +6,5 @@
 
 - name: Build the MANSPIDER docker image
   ansible.builtin.command:
-    cmd: "docker build . -t MANSPIDER"
+    cmd: "docker build . -t manspider"
     chdir: "{{ ansible_user_dir }}/tools/MANSPIDER"
