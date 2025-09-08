@@ -15,13 +15,6 @@
     dest: "{{ ansible_user_dir }}/Documents/tools/windows/LaZagne.exe"
     mode: '0755'
 
-# - name: Download Snaffler.exe and save to tools folder
-#   ansible.builtin.get_url:
-#     url: https://release-assets.githubusercontent.com/github-production-release-asset/251227221/aae4dc16-f7e7-4f2e-b0dc-8087f9533021
-#     dest: "{{ ansible_user_dir }}/Documents/tools/windows/Snaffler.exe"
-#     mode: '0755'
-# https://release-assets.githubusercontent.com/github-production-release-asset/251227221/aae4dc16-f7e7-4f2e-b0dc-8087f9533021?sp=r&sv=2018-11-09&sr=b&spr=https&se=2025-09-08T08%3A26%3A15Z&rscd=attachment%3B+filename%3DSnaffler.exe&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2025-09-08T07%3A26%3A06Z&ske=2025-09-08T08%3A26%3A15Z&sks=b&skv=2018-11-09&sig=1Kh6o2CqUnGtemfhk2Gc%2Bu7YSOyUX52c%2BP%2BTnVsqNac%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc1NzMxNzQwMywibmJmIjoxNzU3MzE3MTAzLCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.a-T6PNQxTck4V_7I1zezM601E7pNYeES9Q2MKdBTE5I&response-content-disposition=attachment%3B%20filename%3DSnaffler.exe&response-content-type=application%2Foctet-stream
-
 - name: Download Snaffler.exe from official release
   ansible.builtin.uri:
     url: https://github.com/SnaffCon/Snaffler/releases/download/1.0.212/Snaffler.exe
