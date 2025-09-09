@@ -30,12 +30,14 @@ Note: VPN Connection Name will be created based file name.
 - Rename VPN Connection Name
 `sudo nmcli connection modify <Current VPN NAME> con-name <New VPN NAME>`
 
-## PCredz
+## Docker Tools
+### PCredz
 source: https://github.com/lgandx/PCredz
 
-- Docker build image 
-`docker build . -t pcredz`
-- Then use the command below to map the current working directory inside the Pcredz container. This is useful for moving .pcap files to parse or for retrieving log files from a live capture.
-`docker run --net=host -v $(pwd):/opt/Pcredz -it pcredz`
-- To run the tool
-`docker run pcredz python3 ./Pcredz -f file-to-parse.pcap`
+- To run the tool Example:
+`docker run --net=host -v "/$(pwd)":/opt/data pcredz python3 Pcredz -f /opt/data/demo.pcapng`
+
+### MANSPIDER
+source: https://github.com/blacklanternsecurity/MANSPIDER
+- To run the tool Example:
+`docker run --rm -v "/$(pwd)":/root/.manspider manspider 10.129.234.173 -c 'Administrator' -u 'jbader' -p 'ILovePower333###'`
