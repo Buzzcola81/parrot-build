@@ -38,3 +38,8 @@
   git:
     repo: https://github.com/Kevin-Robertson/Invoke-TheHash.git
     dest: "{{ ansible_user_dir }}/Documents/tools/windows/Invoke-TheHash"
+
+- name: Clone KeyTabExtract repository
+  git:
+    repo: https://github.com/sosdave/KeyTabExtract.git
+    dest: "{{ ansible_user_dir }}/tools/KeyTabExtract"
