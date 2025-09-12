@@ -83,3 +83,8 @@
     dest: /usr/local/bin/chisel
     mode: '0755'
 
+- name: Download linikatz.sh and save to tools folder
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/CiscoCXSecurity/linikatz/master/linikatz.sh
+    dest: "{{ ansible_user_dir }}/Documents/tools/linux/linikatz.sh"
+    mode: '0755'
