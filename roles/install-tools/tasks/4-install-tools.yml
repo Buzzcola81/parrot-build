@@ -43,3 +43,11 @@
   become: false
   args:
     creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/donpapi"
+
+- name: "Install krb5-user utility"
+  apt:
+    name:
+      - krb5-user
+    state: present
+  become: true
+  become_method: sudo
