@@ -67,12 +67,12 @@
   local_action:
     module: get_url
     url: https://github.com/jpillora/chisel/releases/download/v1.10.1/chisel_1.10.1_linux_amd64.gz
-    dest: /tmp/chisel_1.7.7_linux_amd64.gz
+    dest: /tmp/chisel_1.10.1_linux_amd64.gz
     mode: '0755'
 
 - name: Extract Chisel binary
   ansible.builtin.command:
-    cmd: gzip -d chisel_1.7.7_linux_amd64.gz
+    cmd: gzip -d chisel_1.10.1_linux_amd64.gz
     chdir: /tmp
 
 - name: Move and rename Chisel to system location
