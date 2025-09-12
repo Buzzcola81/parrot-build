@@ -72,7 +72,7 @@
 
 - name: Extract Chisel binary
   ansible.builtin.command:
-    cmd: gzip -d chisel_1.10.1_linux_amd64.gz
+    cmd: gzip -d -f chisel_1.10.1_linux_amd64.gz
     chdir: /tmp
 
 - name: Move and rename Chisel to system location
