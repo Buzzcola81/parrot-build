@@ -75,13 +75,7 @@
     cmd: gzip -d chisel_1.7.7_linux_amd64.gz
     chdir: /tmp
 
-- name: Move and rename Chisel binary
-  ansible.builtin.move:
-    src: /tmp/chisel_1.7.7_linux_amd64
-    dest: /tmp/chisel
-    mode: '0755'
-
-- name: Move  and rename Chisel to system location
+- name: Move and rename Chisel to system location
   become: true
   become_method: sudo
   copy:
