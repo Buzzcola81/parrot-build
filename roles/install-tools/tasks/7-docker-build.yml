@@ -1,15 +1,25 @@
 ---
+- name: Check if PCredz image exists
+  ansible.builtin.shell: "docker images -q pcredz"
+  register: pcredz_image
+  changed_when: false
+
 - name: Build the PCredz docker image
   ansible.builtin.command:
     cmd: "docker build . -t pcredz"
     chdir: "{{ ansible_user_dir }}/tools/PCredz"
-  when: docker images pcredz | grep -q pcredz | grep -v .
+  when: pcredz_image.stdout == ""
+
+- name: Check if MANSPIDER image exists
+  ansible.builtin.shell: "docker images -q manspider"
+  register: manspider_image
+  changed_when: false
 
 - name: Build the MANSPIDER docker image
   ansible.builtin.command:
     cmd: "docker build . -t manspider"
     chdir: "{{ ansible_user_dir }}/tools/MANSPIDER"
-  when: docker images manspider | grep -q manspider | grep -v .
+  when: manspider_image.stdout == ""
 
 # - name: Check if PCredz image exists
 #   community.docker.docker_image_facts:
