@@ -20,29 +20,3 @@
     cmd: "docker build . -t manspider"
     chdir: "{{ ansible_user_dir }}/tools/MANSPIDER"
   when: manspider_image.stdout == ""
-
-# - name: Check if PCredz image exists
-#   community.docker.docker_image_facts:
-#     name: pcredz
-#   register: pcredz_image
-#   delegate_to: localhost
-#   delegate_facts: true
-
-# - name: Build the PCredz docker image
-#   ansible.builtin.command:
-#     cmd: "docker build . -t pcredz"
-#     chdir: "{{ ansible_user_dir }}/tools/PCredz"
-#   when: pcredz_image.images.pcredz is not found
-
-# - name: Check if MANSPIDER image exists
-#   community.docker.docker_image_facts:
-#     name: manspider
-#   register: manspider_image
-#   delegate_to: localhost
-#   delegate_facts: true
-
-# - name: Build the MANSPIDER docker image
-#   ansible.builtin.command:
-#     cmd: "docker build . -t manspider"
-#     chdir: "{{ ansible_user_dir }}/tools/MANSPIDER"
-#   when: manspider_image.images.manspider is not found
