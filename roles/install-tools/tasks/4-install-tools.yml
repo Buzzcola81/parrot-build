@@ -52,34 +52,9 @@
   become: true
   become_method: sudo
 
-# - name: Install oscrypto with pipx (as normal user needed for PKINITtools)
-#   command: pipx install git+https://github.com/wbond/oscrypto.git
-#   become: false
+- name: Install oscrypto with pip3 (as normal user needed for PKINITtools)
+  command: pip3 install git+https://github.com/wbond/oscrypto.git
+  become: false
 #   args:
 #     creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/oscrypto"
 
-- name: Install oscrypto in virtual environment
-  become: false  # Don't use sudo for virtual environment creation
-  block:
-    - name: Create virtual environment
-      command:
-        cmd: python3 -m venv oscrypto
-        creates: "{{ lookup('env','HOME') }}/.local/python3/venvs/oscrypto"
-      args:
-        chdir: "{{ playbook_dir }}"  # Create in playbook directory
-
-    - name: Activate virtual environment
-      command:
-        cmd: source myenv/bin/activate && python -c "import sys; print(sys.prefix)"
-        creates: "{{ lookup('env','HOME') }}/.local/python3/venvs/oscrypto/venv_active.txt"  # Marker file to track activation
-      args:
-        chdir: "{{ playbook_dir }}"
-      register: venv_activation
-      failed_when: "'prefix' not in venv_activation.stdout"
-
-    - name: Install oscrypto
-      pip:
-        name: git+https://github.com/wbond/oscrypto.git
-        executable: pip3
-      environment:
-        PATH: "{{ ansible_env.PATH }}:{{ lookup('env','HOME') }}/.local/python3/venvs/oscrypto/bin"
