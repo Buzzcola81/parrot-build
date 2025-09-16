@@ -74,6 +74,8 @@
     dest: /usr/lib/libcrypto.so
     state: link
     force: yes
+  become: true
+  become_method: sudo
 
 - name: Update library cache (required for PKINITtools)
   command: ldconfig
