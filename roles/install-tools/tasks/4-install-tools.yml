@@ -63,6 +63,7 @@
 - name: "Install libssl-dev (required for PKINITtools)"
   apt:
     name:
+      - libssl1.1
       - libssl-dev
     state: present
   become: true
@@ -70,7 +71,7 @@
 
 - name: Create libcrypto symbolic link (required for PKINITtools)
   file:
-    src: /usr/lib/x86_64-linux-gnu/libcrypto.so.3
+    src: /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
     dest: /usr/lib/libcrypto.so
     state: link
     force: yes
