@@ -59,3 +59,11 @@
 - name: Intall minikerberos (required for PKINITtools)
   command: pip3 install --force minikerberos --break-system-packages
   become: false
+
+- name: "Install libssl-dev (required for PKINITtools)"
+  apt:
+    name:
+      - libssl-dev
+    state: present
+  become: true
+  become_method: sudo
