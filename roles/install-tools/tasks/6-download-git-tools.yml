@@ -59,8 +59,15 @@
     repo: https://github.com/dirkjanm/PKINITtools.git
     dest: "{{ ansible_user_dir }}/tools/PKINITtools"
 
-- name: Install PKINITtools with pipx (as normal user, including requirements.txt)
-  command: pipx install --force "{{ ansible_user_dir }}/tools/PKINITtools" --pip-args="-r requirements.txt"
+- name: Create impacket venv with pipx (required for PKINITtools)
+  command: pipx install --force impacket
   become: false
   args:
-    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/pkinittools"
+    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/impacket"
+
+- name: Intall minikerberos venv with pipx (required for PKINITtools)
+  command: pipx install --force minikerberos
+  become: false
+  args:
+    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/minikerberos"
+
