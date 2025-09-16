@@ -41,3 +41,21 @@ source: https://github.com/lgandx/PCredz
 source: https://github.com/blacklanternsecurity/MANSPIDER
 - To run the tool Example:
 `docker run --rm -v "/$(pwd)":/root/.manspider manspider 10.129.234.173 -c 'Administrator' -u 'jbader' -p 'ILovePower333###'`
+
+
+## Manual Tool installs
+### PKINITtools 
+Source: https://github.com/dirkjanm/PKINITtools
+HTB Module Source: https://academy.hackthebox.com/module/147/section/1335
+
+Ansible automation was taking so long to do.
+
+```
+git clone https://github.com/dirkjanm/PKINITtools.git && cd PKINITtools
+python3 -m venv .venv
+source .venv/bin/activate
+pip3 install -r requirements.txt
+pip3 install -I git+https://github.com/wbond/oscrypto.git
+
+```
+Exit Python Virtual env: `deactivate`
