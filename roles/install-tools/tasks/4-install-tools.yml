@@ -67,3 +67,14 @@
     state: present
   become: true
   become_method: sudo
+
+- name: Create libcrypto symbolic link (required for PKINITtools)
+  file:
+    src: /usr/lib/x86_64-linux-gnu/libcrypto.so.3
+    dest: /usr/lib/libcrypto.so
+    state: link
+    force: yes
+
+- name: Update library cache (required for PKINITtools)
+  command: ldconfig
+  become: yes
