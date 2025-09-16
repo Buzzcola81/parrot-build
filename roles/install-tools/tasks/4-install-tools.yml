@@ -53,7 +53,7 @@
   become_method: sudo
 
 - name: Install oscrypto with pipx (as normal user needed for PKINITtools)
-  command: pipx install --force git+https://github.com/wbond/oscrypto.git
+  command: pip3 install -I git+https://github.com/wbond/oscrypto.git
   become: false
-  args:
-    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/oscrypto"
+  # args:
+  #   creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/oscrypto"
