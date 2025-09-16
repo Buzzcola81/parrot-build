@@ -65,7 +65,7 @@
     git clone https://github.com/dirkjanm/PKINITtools.git
     cd PKINITtools
     python3 -m venv .PKINITtools
-    source .PKINITtools/bin/activate
+    . .PKINITtools/bin/activate
     pip3 install -r requirements.txt
     pip3 install -I git+https://github.com/wbond/oscrypto.git
   args:
