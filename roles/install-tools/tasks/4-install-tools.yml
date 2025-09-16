@@ -79,4 +79,5 @@
 
 - name: Update library cache (required for PKINITtools)
   command: ldconfig
-  become: yes
+  become: true
+  become_method: sudo
