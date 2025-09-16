@@ -52,51 +52,14 @@
   become: true
   become_method: sudo
 
-- name: Install oscrypto with pip3 (as normal user needed for PKINITtools)
-  command: pip3 install git+https://github.com/wbond/oscrypto.git --break-system-packages
-  become: false
-
-- name: Install oscrypto with pip3 (as normal user needed for PKINITtools)
-  command: pip install oscrypto --break-system-packages
-  become: false
-
-- name: Intall minikerberos (required for PKINITtools)
-  command: pip3 install --force minikerberos --break-system-packages
-  become: false
-
-- name: Ensure Debian Security repository is present (required for PKINITtools)
-  lineinfile:
-    path: /etc/apt/sources.list
-    line: "deb http://security.debian.org/debian-security bullseye-security main"
-    state: present
-    create: yes
-    insertafter: EOF
-  become: yes
-
-- name: Update apt cache after adding security repo (required for PKINITtools)
-  apt:
-    update_cache: yes
-  become: yes
-
-- name: "Install libssl-dev (required for PKINITtools)"
-  apt:
-    name:
-      - libssl1.1
-      - libssl-dev
-    state: present
-  become: true
-  become_method: sudo
-
-- name: Create libcrypto symbolic link (required for PKINITtools)
-  file:
-    src: /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
-    dest: /usr/lib/libcrypto.so
-    state: link
-    force: yes
-  become: true
-  become_method: sudo
-
-- name: Update library cache (required for PKINITtools)
-  command: ldconfig
-  become: true
-  become_method: sudo
+- name: Setup PKINITtools from script
+  ansible.builtin.shell: |
+    set -e
+    git clone https://github.com/dirkjanm/PKINITtools.git
+    cd PKINITtools
+    python3 -m venv .PKINITtools
+    source .PKINITtools/bin/activate
+    pip3 install -r requirements.txt
+    pip3 install -I git+https://github.com/wbond/oscrypto.git
+  args:
+    chdir: "{{ lookup('env','HOME') }}/.local/python/venvs/"

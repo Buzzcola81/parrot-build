@@ -54,13 +54,13 @@
     repo: https://github.com/ShutdownRepo/pywhisker.git
     dest: "{{ ansible_user_dir }}/tools/pywhisker"
 
-- name: Clone PKINITtools repository
-  git:
-    repo: https://github.com/dirkjanm/PKINITtools.git
-    dest: "{{ ansible_user_dir }}/tools/PKINITtools"
+# - name: Clone PKINITtools repository
+#   git:
+#     repo: https://github.com/dirkjanm/PKINITtools.git
+#     dest: "{{ ansible_user_dir }}/tools/PKINITtools"
 
-- name: Create impacket venv with pipx (required for PKINITtools)
-  command: pipx install --force impacket
-  become: false
-  args:
-    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/impacket"
+# - name: Create impacket venv with pipx (required for PKINITtools)
+#   command: pipx install --force impacket
+#   become: false
+#   args:
+#     creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/impacket"
