@@ -56,6 +56,10 @@
   command: pip3 install git+https://github.com/wbond/oscrypto.git --break-system-packages
   become: false
 
+- name: Install oscrypto with pip3 (as normal user needed for PKINITtools)
+  command: pip install oscrypto --break-system-packages
+  become: false
+
 - name: Intall minikerberos (required for PKINITtools)
   command: pip3 install --force minikerberos --break-system-packages
   become: false
