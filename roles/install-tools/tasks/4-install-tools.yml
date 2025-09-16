@@ -52,6 +52,13 @@
   become: true
   become_method: sudo
 
+- name: Create virtual environments directory
+  ansible.builtin.file:
+    path: "{{ lookup('env','HOME') }}/.local/python/venvs/"
+    state: directory
+    mode: '0755'
+    recurse: yes
+
 - name: Setup PKINITtools from script
   ansible.builtin.shell: |
     set -e
