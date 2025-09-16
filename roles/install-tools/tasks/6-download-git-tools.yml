@@ -43,3 +43,21 @@
   git:
     repo: https://github.com/sosdave/KeyTabExtract.git
     dest: "{{ ansible_user_dir }}/tools/KeyTabExtract"
+
+- name: Clone krbrelayx repository
+  git:
+    repo: https://github.com/dirkjanm/krbrelayx.git
+    dest: "{{ ansible_user_dir }}/tools/krbrelayx"
+
+- name: Clone pywhisker repository
+  git:
+    repo: https://github.com/ShutdownRepo/pywhisker.git
+    dest: "{{ ansible_user_dir }}/tools/pywhisker"
+
+- name: Install PKINITtools with pipx (as normal user, including requirements.txt)
+  command: >
+    pipx install --force "git+https://github.com/dirkjanm/PKINITtools.git"
+    --pip-args="-r requirements.txt"
+  become: false
+  args:
+    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/pkinittools"
