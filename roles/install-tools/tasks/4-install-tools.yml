@@ -52,21 +52,3 @@
   become: true
   become_method: sudo
 
-- name: Create virtual environments directory
-  ansible.builtin.file:
-    path: "{{ lookup('env','HOME') }}/.local/python/venvs/"
-    state: directory
-    mode: '0755'
-    recurse: yes
-
-- name: Setup PKINITtools from script
-  ansible.builtin.shell: |
-    set -e
-    git clone https://github.com/dirkjanm/PKINITtools.git
-    cd PKINITtools
-    python3 -m venv .PKINITtoolsvenv
-    . .PKINITtoolsvenv/bin/activate
-    pip3 install -r requirements.txt
-    pip3 install -I git+https://github.com/wbond/oscrypto.git
-  args:
-    chdir: "{{ lookup('env','HOME') }}/.local/python/venvs/"
