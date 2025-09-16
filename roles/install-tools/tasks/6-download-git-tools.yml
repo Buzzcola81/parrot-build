@@ -64,10 +64,3 @@
   become: false
   args:
     creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/impacket"
-
-- name: Intall minikerberos venv with pipx (required for PKINITtools)
-  command: pipx install --force minikerberos
-  become: false
-  args:
-    creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/minikerberos"
-

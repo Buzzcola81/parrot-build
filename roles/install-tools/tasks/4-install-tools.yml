@@ -55,6 +55,7 @@
 - name: Install oscrypto with pip3 (as normal user needed for PKINITtools)
   command: pip3 install git+https://github.com/wbond/oscrypto.git --break-system-packages
   become: false
-#   args:
-#     creates: "{{ lookup('env','HOME') }}/.local/pipx/venvs/oscrypto"
 
+- name: Intall minikerberos (required for PKINITtools)
+  command: pip3 install --force minikerberos --break-system-packages
+  become: false
