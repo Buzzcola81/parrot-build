@@ -88,3 +88,43 @@
     url: https://raw.githubusercontent.com/CiscoCXSecurity/linikatz/master/linikatz.sh
     dest: "{{ ansible_user_dir }}/Documents/tools/linux/linikatz.sh"
     mode: '0755'
+
+- name: Download ligolo-ng_agent
+  local_action:
+    module: get_url
+    url: https://github.com/nicocha30/ligolo-ng/releases/download/v0.8.2/ligolo-ng_agent_0.8.2_linux_amd64.tar.gz
+    dest: /tmp/ligolo-ng_agent_0.8.2_linux_amd64.tar.gz
+    mode: '0755'
+
+- name: Extract ligolo-ng_agent
+  ansible.builtin.command:
+    cmd: tar -xvzf ligolo-ng_agent_0.8.2_linux_amd64.tar.gz
+    chdir: /tmp
+
+- name: Move ligolo-ng_agent to tools folder
+  become: true
+  become_method: sudo
+  copy:
+    src: /tmp/agent
+    dest: "{{ ansible_user_dir }}/tools/ligolo-ng/agent"
+    mode: '0755'
+
+- name: Download ligolo-ng_proxy
+  local_action:
+    module: get_url
+    url: https://github.com/nicocha30/ligolo-ng/releases/download/v0.8.2/ligolo-ng_proxy_0.8.2_linux_amd64.tar.gz
+    dest: /tmp/ligolo-ng_proxy_0.8.2_linux_amd64.tar.gz
+    mode: '0755'
+
+- name: Extract ligolo-ng_proxy
+  ansible.builtin.command:
+    cmd: tar -xvzf ligolo-ng_proxy_0.8.2_linux_amd64.tar.gz
+    chdir: /tmp
+
+- name: Move ligolo-ng_proxy to tools folder
+  become: true
+  become_method: sudo
+  copy:
+    src: /tmp/proxy
+    dest: "{{ ansible_user_dir }}/tools/ligolo-ng/proxy"
+    mode: '0755'
